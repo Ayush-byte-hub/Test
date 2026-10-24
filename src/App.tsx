@@ -64,7 +64,7 @@ const getSavedSubmittedEmails = (): Record<string, string> => {
 
 export default function App() {
   const [cards, setCards] = useState<GiftCard[]>(INITIAL_GIFT_CARDS);
-  const [selectedCard, setSelectedCard] = useState<GiftCard | null>(INITIAL_GIFT_CARDS[9]); // Default to Roblox $100 as in video
+  const [selectedCard, setSelectedCard] = useState<GiftCard | null>(INITIAL_GIFT_CARDS[0]); // Default to Amazon $100 as requested
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   
@@ -272,24 +272,6 @@ export default function App() {
               </button>
             ))}
           </div>
-        </div>
-
-        {/* Fair Play 3-Card Limit Counter Bar */}
-        <div className="px-3 sm:px-4 py-2 flex items-center justify-between text-xs text-slate-700 bg-white/70 backdrop-blur-md border-b border-white/60">
-          <div className="flex items-center gap-1.5 font-bold">
-            <span className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse" />
-            <span>Giveaway Limit: Max 3 Cards Per User</span>
-          </div>
-          <button
-            onClick={() => setIsLimitModalOpen(true)}
-            className={`font-black px-2.5 py-0.5 rounded-full text-[11px] transition-all cursor-pointer shadow-xs ${
-              claimedCardIds.length >= MAX_GIFT_CARDS_ALLOWED
-                ? 'bg-amber-100 text-amber-900 border border-amber-300'
-                : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'
-            }`}
-          >
-            {claimedCardIds.length}/{MAX_GIFT_CARDS_ALLOWED} Claimed
-          </button>
         </div>
 
         {/* Gift Cards Grid: 2 Columns on Mobile (matching video) */}

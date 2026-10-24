@@ -12,3 +12,4 @@ coverage/
 *.zip
 *.tar.gz
 .aistudio/
+public/assets/aistudio/IMG_54*
