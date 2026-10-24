@@ -4,11 +4,13 @@ import { GiftCard, QualityMode } from '../types';
 interface CardArtworkProps {
   card: GiftCard;
   className?: string;
+  isPriority?: boolean;
 }
 
 export const CardArtwork: React.FC<CardArtworkProps> = ({
   card,
   className = '',
+  isPriority = false,
 }) => {
   const [imageError, setImageError] = useState(false);
 
@@ -25,6 +27,8 @@ export const CardArtwork: React.FC<CardArtworkProps> = ({
         <img
           src={card.imageUrl}
           alt={`${card.name} Gift Card`}
+          loading={isPriority ? 'eager' : 'lazy'}
+          decoding="async"
           referrerPolicy="no-referrer"
           onError={() => setImageError(true)}
           style={{

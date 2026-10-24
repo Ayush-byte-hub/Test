@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { GiftCard } from '../types';
 import { MrBeastLogo } from './MrBeastLogo';
 import { Mail, Clock, CheckCircle2, Lock, ArrowRight, Sparkles } from 'lucide-react';
-import confetti from 'canvas-confetti';
 
 interface EmailClaimModalProps {
   isOpen: boolean;
@@ -62,14 +61,17 @@ export const EmailClaimModal: React.FC<EmailClaimModalProps> = ({
       setSubmittedEmail(trimmed);
       onSaveEmail(card.id, trimmed);
 
-      try {
-        confetti({
-          particleCount: 80,
-          spread: 70,
-          origin: { y: 0.6 },
-          colors: ['#0085ff', '#00b4d8', '#10b981', '#ffffff'],
-        });
-      } catch (_) {}
+      import('canvas-confetti')
+        .then((mod) => {
+          const confetti = mod.default;
+          confetti({
+            particleCount: 80,
+            spread: 70,
+            origin: { y: 0.6 },
+            colors: ['#0085ff', '#00b4d8', '#10b981', '#ffffff'],
+          });
+        })
+        .catch(() => {});
     }, 600);
   };
 

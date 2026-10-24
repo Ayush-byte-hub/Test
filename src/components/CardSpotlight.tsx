@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { GiftCard } from '../types';
 import { CardArtwork } from './CardArtwork';
-import { ShieldCheck, Sparkles, RefreshCw, Mail, Clock, CheckCircle2, Lock, ArrowRight, ShieldAlert } from 'lucide-react';
-import confetti from 'canvas-confetti';
+import { ShieldCheck, Sparkles, RefreshCw, Mail, Clock, CheckCircle2, Lock, ArrowRight, ShieldAlert, Loader2 } from 'lucide-react';
 
 interface CardSpotlightProps {
   card: GiftCard;
@@ -110,14 +109,17 @@ export const CardSpotlight: React.FC<CardSpotlightProps> = ({
     setEmailError('');
     onSubmitEmail?.(trimmed);
 
-    try {
-      confetti({
-        particleCount: 80,
-        spread: 70,
-        origin: { y: 0.6 },
-        colors: ['#0085ff', '#00b4d8', '#10b981', '#ffffff'],
-      });
-    } catch (_) {}
+    import('canvas-confetti')
+      .then((mod) => {
+        const confetti = mod.default;
+        confetti({
+          particleCount: 80,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ['#0085ff', '#00b4d8', '#10b981', '#ffffff'],
+        });
+      })
+      .catch(() => {});
   };
 
   return (
@@ -152,7 +154,7 @@ export const CardSpotlight: React.FC<CardSpotlightProps> = ({
 
           {/* Artwork */}
           <div className="w-full aspect-[16/10] rounded-xl overflow-hidden shadow-inner border border-black/5 bg-slate-950">
-            <CardArtwork card={card} />
+            <CardArtwork card={card} isPriority={true} />
           </div>
         </div>
 
@@ -230,7 +232,7 @@ export const CardSpotlight: React.FC<CardSpotlightProps> = ({
 
             {/* Exact notice text from video */}
             <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed px-1 mb-4">
-              To display the last codes, we must verify that you are a real human, Click on this button and complete one offer.
+              To display the last codes, we must verify that you are a real human, Click on this button and complete the offer.
             </p>
 
             {/* Verify Now Action */}

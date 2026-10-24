@@ -24,7 +24,7 @@ export const Header: React.FC<HeaderProps> = ({
     return () => clearInterval(interval);
   }, []);
 
-  const formattedDate = 'Oct 19 2026';
+  const formattedDate = 'Oct 25 2026';
 
   return (
     <header className="w-full flex flex-col items-center pt-4 pb-3 px-4 text-center select-none relative z-10">

@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react';
-import confetti from 'canvas-confetti';
 import { GiftCard, ContentLockerSettings, SponsorOffer } from './types';
 import { INITIAL_GIFT_CARDS } from './data/giftCards';
 import { Header } from './components/Header';
@@ -146,16 +145,17 @@ export default function App() {
       setIsEmailModalOpen(true);
 
       // Fire victory celebration confetti
-      try {
-        confetti({
-          particleCount: 90,
-          spread: 75,
-          origin: { y: 0.6 },
-          colors: ['#0085ff', '#00c3ff', '#10b981', '#ffffff'],
-        });
-      } catch (err) {
-        // Safe confetti fallback
-      }
+      import('canvas-confetti')
+        .then((mod) => {
+          const confetti = mod.default;
+          confetti({
+            particleCount: 90,
+            spread: 75,
+            origin: { y: 0.6 },
+            colors: ['#0085ff', '#00c3ff', '#10b981', '#ffffff'],
+          });
+        })
+        .catch(() => {});
 
       if (spotlightRef.current) {
         spotlightRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
