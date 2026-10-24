@@ -1,0 +1,6 @@
+{
+  "name": "MrBeast Gift Card Giveaway",
+  "description": "Responsive gift card giveaway and content locker landing page with live code generator and sponsor verification.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
